@@ -36,7 +36,9 @@
 
 Group member names:
 Dylan Riffel          https://github.com/driff001
+
 Rohit Manimaran https://github.com/Rohit-M17
+
 Jeremy Walker    https://github.com/jwalk057
 
 Project Description:
