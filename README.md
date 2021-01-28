@@ -35,6 +35,7 @@
  Project Title: <Simon Says> Bot         https://github.com/orgs/cs100/teams/rmani010-driff001-jwalk057/discussions
 
 Group member names:
+
 Dylan Riffel          https://github.com/driff001
 
 Rohit Manimaran https://github.com/Rohit-M17
