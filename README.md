@@ -30,7 +30,7 @@
  >   * Why the chosen design pattern will lead to a good solution to that problem
  > * This description should be in enough detail that the TA/instructor can determine the complexity of the project and if it is sufficient for the team members to complete in the time allotted. 
  -------------------------------------------------------------------------------------------------------------------------------------------------------------------------
- PHASE 1: 
+ PHASE I: 
  
  Project Title: <Simon Says> Bot         https://github.com/orgs/cs100/teams/rmani010-driff001-jwalk057/discussions
 
