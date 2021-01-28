@@ -42,16 +42,19 @@ Jeremy Walker    https://github.com/jwalk057
 Project Description:
 	Why is it interesting?
 	
-This project is interesting to use because we want to learn exactly how discord bots function in tandem with spotify. Also, we see it as an opportunity to learn Python since the majority of the group has little experience with it. The project also may help to inform us about how APIs are sourced and how they can apply to our bot.
+**This project is interesting to use because we want to learn exactly how discord bots function in tandem with spotify. Also, we see it as an opportunity to learn Python since the majority of the group has little experience with it. The project also may help to inform us about how APIs are sourced and how they can apply to our bot.**
 
-Language/tools/technology used: Python, Discord, Spotify, Github 
-	
+
+**Language/tools/technology used: Python, Discord, Spotify, Github** 
+
+
 What is the input/output of the project:
-The input of the bot would require the user to type commands (i.e., Simon says…) into the server to output music depending on the user’s command/mood. We would also have the bot output recommendations of playlists and could make playlists for users as a result of the user’s input.
+**The input of the bot would require the user to type commands (i.e., Simon says…) into the server to output music depending on the user’s command/mood. We would also have the bot output recommendations of playlists and could make playlists for users as a result of the user’s input.**
+
 
 Two design patterns used(descriptions of them and why they were picked):
 	
-Abstract factory(large scale): 
+**Abstract factory(large scale):** 
 “User interface that supports multiple look-and-feel standards”
 The abstract class that declares the interface is the iteration commands that are given to Simon
 I.e., Simon 
@@ -60,7 +63,7 @@ Add If I ain’t got you by alicia keys to my playlist
 This will provide the user feel of interacting with Simon
 The concrete classes that the user would not see or access is what happens under the hood of this program. The Spotify API posts and gets that create playlists for the users of the discord channel
 
-Composite(smaller scale):
+**Composite(smaller scale):**
 "The key to the Composite pattern is an abstract class that represents both primitives and their containers”
 Treat some data members of Simon Says Bot as abstract base class objects with pure virtual functions. We can then derive classes to use these functions, as well as containers of derived classes. An example would be a derived class being a Playlist, which would be a container of other derived classes being Songs. A call of play() to the Playlist would recursively call the play() function of each song as well.
 
