@@ -30,7 +30,7 @@
  >   * Why the chosen design pattern will lead to a good solution to that problem
  > * This description should be in enough detail that the TA/instructor can determine the complexity of the project and if it is sufficient for the team members to complete in the time allotted. 
  -------------------------------------------------------------------------------------------------------------------------------------------------------------------------
- PHASE I: 
+ PHASE 1: 
  
  Project Title: <Simon Says> Bot         https://github.com/orgs/cs100/teams/rmani010-driff001-jwalk057/discussions
 
@@ -58,12 +58,12 @@ I.e., Simon
 recommend me some songs
 Add If I ain’t got you by alicia keys to my playlist
 This will provide the user feel of interacting with Simon
-The concrete classes that the user would not see or access is what happens under the hood of this program. The Spotify API posts and gets that create playlists for the users of the discord channel.
-	
+The concrete classes that the user would not see or access is what happens under the hood of this program. The Spotify API posts and gets that create playlists for the users of the discord channel
 
 Composite(smaller scale):
-“The key to the Composite pattern is an abstract class that represents both primitives and their containers”
+"The key to the Composite pattern is an abstract class that represents both primitives and their containers”
 Treat some data members of Simon Says Bot as abstract base class objects with pure virtual functions. We can then derive classes to use these functions, as well as containers of derived classes. An example would be a derived class being a Playlist, which would be a container of other derived classes being Songs. A call of play() to the Playlist would recursively call the play() function of each song as well.
+
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
  > ## Phase II
  > In addition to completing the "Class Diagram" section below, you will need to 
