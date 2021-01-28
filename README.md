@@ -58,7 +58,7 @@ I.e., Simon
 recommend me some songs
 Add If I ain’t got you by alicia keys to my playlist
 This will provide the user feel of interacting with Simon
-The concrete classes that the user would not see or access is what happens under the hood of this program. The Spotify API posts and gets that create playlists for the users of the discord channel
+The concrete classes that the user would not see or access is what happens under the hood of this program. The Spotify API posts and gets that create playlists for the users of the discord channel.
 	
 
 Composite(smaller scale):
