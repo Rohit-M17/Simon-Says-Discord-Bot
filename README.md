@@ -69,6 +69,7 @@ This is implemented by creating another derived class that stores a Playlist whi
 
 >Implements the statuses feature of Simon
 >If a user is planning on stepping away from a discord call they can tell Simon they are stepping away for dinner or using the restroom and this will set their status to their input, additionally, users can input how long they will be away for
+>
 >The abstraction for the Status class is that the derived class will break up the work into two classes:
 >TimerStatus - Calculates the time since the user has set their status.
 >AwayStatus - Calculates the time until the user’s status is up.
