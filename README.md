@@ -66,6 +66,7 @@ We want users in a discord server to have the ability to queue up songs with Sim
 This is implemented by creating another derived class that stores a Playlist which is a vector of Songs which has functions that can perform operations on the songs so that the order of the songs in the queue are manipulated to the user’s desire(i.e., shuffle randomly, by genre, by user, by last added, deque)
 
 >**Strategy Pattern:**
+
 >Implements the statuses feature of Simon
 >If a user is planning on stepping away from a discord call they can tell Simon they are stepping away for dinner or using the restroom and this will set their status to their input, additionally, users can input how long they will be away for
 >The abstraction for the Status class is that the derived class will break up the work into two classes:
