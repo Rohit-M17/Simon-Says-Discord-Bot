@@ -59,19 +59,19 @@ Treat some data members of Simon Says Bot as abstract base class objects with pu
 
 >*Composite Pattern:*
 
->	Implements the searching and creating of a song object at runtime depending on the input provided by the user in Discord upon summoning Simon
->	Song objects can either be of Spotify Song or Youtube Song type and they derive from the abstract base class Song
->		Therefore we have implemented the creation of them separately in the event that we would like to support another streaming service
->		We want users in a discord server to have the ability to queue up songs with Simon
->			This is implemented by creating another derived class that stores a Playlist which is a vector of Songs which has functions that can perform operations on the songs so that the order of the songs in the queue are manipulated to the user’s desire(i.e., shuffle randomly, by genre, by user, by last added, deque)
+>* Implements the searching and creating of a song object at runtime depending on the input provided by the user in Discord upon summoning Simon
+>	* Song objects can either be of Spotify Song or Youtube Song type and they derive from the abstract base class Song
+>		* Therefore we have implemented the creation of them separately in the event that we would like to support another streaming service
+>		* We want users in a discord server to have the ability to queue up songs with Simon
+>			* This is implemented by creating another derived class that stores a Playlist which is a vector of Songs which has functions that can perform operations on the songs so that the order of the songs in the queue are manipulated to the user’s desire(i.e., shuffle randomly, by genre, by user, by last added, deque)
 
 >*Strategy Pattern:*
 
->	Implements the statuses feature of Simon
->		If a user is planning on stepping away from a discord call they can tell Simon they are stepping away for dinner or using the restroom and this will set their status to their input, additionally, users can input how long they will be away for
->	The abstraction for the Status class is that the derived class will break up the work into two classes:
->		TimerStatus - Calculates the time since the user has set their status.
->		AwayStatus - Calculates the time until the user’s status is up.
+>* Implements the statuses feature of Simon
+>	* If a user is planning on stepping away from a discord call they can tell Simon they are stepping away for dinner or using the restroom and this will set their status to their input, additionally, users can input how long they will be away for
+>	* The abstraction for the Status class is that the derived class will break up the work into two classes:
+>		* TimerStatus - Calculates the time since the user has set their status.
+>		* AwayStatus - Calculates the time until the user’s status is up.
  
 
 
