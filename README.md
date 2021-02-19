@@ -67,9 +67,8 @@ Treat some data members of Simon Says Bot as abstract base class objects with pu
 
 >*Attached is a link to the SIMON DISCORD OMT PDF
 >
->[ProjectOmtNew.pdf](https://github.com/cs100/final-project-rmani010-driff001-jwalk057/files/5986844/ProjectOmtNew.pdf)
+>[Discord Simon Bot OMT.pdf](https://github.com/cs100/final-project-rmani010-driff001-jwalk057/files/6008155/Discord.Simon.Bot.OMT.pdf)
 
- 
  
  > ## Phase III
  > You will need to schedule a check-in with the TA (during lab hours or office hours). Your entire team must be present. 
