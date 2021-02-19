@@ -57,11 +57,11 @@ Treat some data members of Simon Says Bot as abstract base class objects with pu
 
 >*Strategy Pattern:*
 
->* Implements the statuses feature of Simon
->	* If a user is planning on stepping away from a discord call they can tell Simon they are stepping away for dinner or using the restroom and this will set their status to their input, additionally, users can input how long they will be away for
->	* The abstraction for the Status class is that the derived class will break up the work into two classes:
->		* TimerStatus - Calculates the time since the user has set their status.
->		* AwayStatus - Calculates the time until the user’s status is up.
+>* Implements the SongFromRecommender class
+>	* If a user would like the discord bot to recommend them a song they can choose to have a recommendation come from Spotify or Youtube.
+>	* The derived classes will break up the work into two classes:
+>		* RecommenderFromSpotify - Uses Spotify API seed_track to get a recommendation.
+>		* RecommenderFromYoutube - Will query Youtube for one of the top song played that day.
  
 
 
