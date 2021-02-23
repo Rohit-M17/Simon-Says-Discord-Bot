@@ -1,9 +1,14 @@
+
+
+
+
+
 import discord
 from discord.ext import commands,tasks
+from discord.voice_client import VoiceClient
 import youtube_dl
 
 from random import choice
-
 
 youtube_dl.utils.bug_reports_message = lambda: ''
 
@@ -25,14 +30,14 @@ ffmpeg_options = {
     'options': '-vn'
 }
 
-
+#Standard format given by ytdl app and ffmpeg
 
 
 
 ytdl = youtube_dl.YoutubeDL(ytdl_format_options)
 
 class YTDLSource(discord.PCMVolumeTransformer):
-    def __init__(self, source, *, data, volume=1.0):
+    def __init__(self, source, *, data, volume=0.5):
         super().__init__(source, volume)
 
         self.data = data
@@ -40,8 +45,11 @@ class YTDLSource(discord.PCMVolumeTransformer):
         self.title = data.get('title')
         self.url = data.get('url')
 
+
     @classmethod
+
     async def from_url(cls, url, *, loop=None, stream=False):
+
         loop = loop or asyncio.get_event_loop()
         data = await loop.run_in_executor(None, lambda: ytdl.extract_info(url, download=not stream))
 
@@ -49,27 +57,98 @@ class YTDLSource(discord.PCMVolumeTransformer):
             # take first item from a playlist
             data = data['entries'][0]
 
-
         filename = data['url'] if stream else ytdl.prepare_filename(data)
-
         return cls(discord.FFmpegPCMAudio(filename, **ffmpeg_options), data=data)
 
-#class that sources youtube and souncloud links through youtube downloader and fffmpeg
 
-client = commands.Bot(command_prefix='!')
+bot = commands.Bot(command_prefix='!')
 
-status = ['Vibing to music','Looking for some new Heat','AFK']
+mood = ['Vibing to music','Looking for some new Heat','AFK','In the Stu']
 
-queue = []
+Queue = []
 
 
-@client.event
+
+@bot.event
 async def on_ready():
-	change_status.start()
+	change_mood.start()
 	print('Simon is online')
 
-@tasks.loop(seconds=180)
-async def change_status():
-	await client.change_presence(activity=discord.Game(choice(status)))	
+@bot.command()
+async def join(ctx):
+   
+    channel = ctx.author.voice.channel
+    await channel.connect()
 
-client.run('ODEzMTgxMTg4OTU3MDEyMDE4.YDLj_w.o9GJQG75-P9lV5vs-23AhkedAOU')
+
+@bot.command(name='play', help='Plays songs directly from Youtube and Soundcloud')
+async def play(ctx, url):
+    if ctx.message.author.voice:
+    	await ctx.send('You must connect to a voice channel to connect')
+    else:
+    global queue
+
+    queue.append(url)
+
+    channel = ctx.author.voice.channel
+    await channel.connect()
+
+    server = ctx.message.guild
+    voice_channel = server.voice_client
+    
+    async with ctx.typing():
+
+        player = await YTDLSource.from_url(url, loop=bot.loop)
+        voice_channel.play(player, after=lambda e: print('Player error: %s' % e) if e else None)
+
+    await ctx.send('**Playing:** {}'.format(player.title))
+    
+
+@bot.command(name='queue', help='Adds a song to the queue')
+async def queue_(ctx):
+    await ctx.send(f'Queue: `{queue}`')
+
+@bot.command(name='skip', help='This command skips the song')
+async def skip(ctx):
+    server = ctx.message.guild
+    
+    voice_channel = server.voice_client
+
+    voice_channel.stop()
+
+@bot.command(name='pause', help='This command pauses the given song')
+async def pause(ctx):
+	server = ctx.message.guild
+    
+    voice_channel = server.voice_client
+
+    voice_channel.pause()
+
+@bot.command(name='resume', help='This command resumes a paused song')
+async def resume(ctx):
+	server = ctx.message.guild
+    
+    voice_channel = server.voice_client
+
+    voice_channel.resume()
+
+
+@tasks.loop(seconds=180)
+async def change_mood():
+	await bot.change_presence(activity=discord.Game(choice(mood)))	
+
+bot.run('ODEzMTgxMTg4OTU3MDEyMDE4.YDLj_w.o9GJQG75-P9lV5vs-23AhkedAOU')
+
+
+
+
+
+
+
+
+
+
+
+
+
+
