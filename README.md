@@ -1,6 +1,6 @@
 
 # Simon Says Discord Bot
- > Authors: [Dylan Riffel](https://github.com/driff001), [Rohit Manimaran](https://github.com/Rohit-M17), [Jeremy Walker](https://github.com/jwalk057)
+ > Authors: [Dylan Riffel](https://github.com/driff001), [Rohit Manimaran](https://github.com/Rohit-M17)
 
  -------------------------------------------------------------------------------------------------------------------------------------------------------------------------
  PHASE I: 
