@@ -67,7 +67,7 @@ Treat some data members of Simon Says Bot as abstract base class objects with pu
 
 *Attached is a link to the SIMON DISCORD OMT PDF
 
-[Discord Simon Bot OMT.pdf](https://github.com/cs100/final-project-rmani010-driff001-jwalk057/files/6008155/Discord.Simon.Bot.OMT.pdf)
+[Discord Simon Bot OMT.pdf](https://github.com/cs100/final-project-rmani010-driff001-jwalk057/files/6120000/Discord.Simon.Bot.OMT.V2.2.pdf)
 
  
  ## Phase III
