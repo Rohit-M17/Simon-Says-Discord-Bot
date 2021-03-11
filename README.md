@@ -87,6 +87,7 @@ Treat some data members of Simon Says Bot as abstract base class objects with pu
 ## Screenshots
 ![valgrind](/Picture/valgrind.png)
 ![queue](/Picture/workingqueue.PNG)
+![functions](/Picture/workingfunctions.PNG)
 ## Installation/Usage
 > Instructions on installing and running your application
 ## Testing
