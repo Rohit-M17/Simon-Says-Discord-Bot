@@ -89,7 +89,7 @@ Treat some data members of Simon Says Bot as abstract base class objects with pu
 ![queue](/Picture/workingqueue.PNG)
 ![functions](/Picture/workingfunctions.PNG)
 ## Installation/Usage
-> Instructions on installing and running your application
+In order to properly utilize this discord bot, you must run command prompt in Administrator mode and install python directly to command propmt. To do this, you must a recent version of python at www.python.org . Once that is done, go to the windows search bar and type "Edit environment variables." Once that's selected, click add path. Then you must include the python executable as path. Then, in order for the bot to function properly, run command prompt as administrator and type "pip install youtube_dl." When this final part is done, run your given .py file in command prompt as administrator by accessing the using cd to access the appropriate file and call "python <yourfilename>.py."
 ## Testing
 > How was your project tested/validated? If you used CI, you should have a "build passing" badge in this README.
 
