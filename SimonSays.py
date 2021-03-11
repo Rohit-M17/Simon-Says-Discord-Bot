@@ -8,6 +8,7 @@ import spotify_dl
 import os
 from os import system
 from random import choice
+global voice_channel
 
 TOKEN = 'ODEzODc3NjYwOTAzNjY5Nzgw.YDVsow.AnbqmRnBXHsTXoyIkeMHZF1h9n0'
 BOT_PREFIX = '!'
@@ -54,7 +55,6 @@ mood = ['Vibing to music','Looking for some new Heat','AFK','In the Stu']
 
 Queue = []
 Rqueue = []
-
 CurSong = []
 
 @bot.event
@@ -124,8 +124,6 @@ class Factory(discord.PCMVolumeTransformer):
         self.title = data.get('title')
         self.url = data.get('url')
         
-
-
     @classmethod
     async def get_urlSpotify(cls, url, *, loop=None, stream=False):
         loop = loop or asyncio.get_event_loop()
@@ -133,8 +131,6 @@ class Factory(discord.PCMVolumeTransformer):
         for file in os.listdir("./"):
             if file.endswith(".mp3"):
                 name = file
-                print(f"Renamed file: {file}")
-                os.rename(file, "currentsong.mp3")
         return name
     
     @classmethod
@@ -154,87 +150,161 @@ class Factory(discord.PCMVolumeTransformer):
         for file in os.listdir("./"):
             if file.endswith(".mp3"):
                 name = file
-                print(f"Renamed file: {file}")
-                os.rename(file, "currentsong.mp3")
         return name
     
 class Song:
     @bot.command(name='play', help='Plays a song immediately')
     async def play(ctx,url):
         server = ctx.message.guild
-        global voice_channel
-        voice_channel=server.voice_client
+        voice_channel = server.voice_client
         Queue.append(url)
         voice_channel.stop()
-        if (url.find('spotify') != -1):
+
+        if(url.find('spotify') != -1):
             async with ctx.typing():
                 player = await Factory.get_urlSpotify(url, loop = bot.loop)
-                player.strip(".mp3")
                 Rqueue.append(player)
                 
-                await ctx.send("**Added:** " + player + "** to the Queue**")
-                while True:
-                    await asyncio.sleep(1)
-                    if voice_channel.is_playing() == False:
-                        voice_channel.play(discord.FFmpegPCMAudio("currentsong.mp3"), after=lambda e: print(f"{player.title} has finished playing"))
+            await ctx.send("**Added:** " + player + "** to the Queue**")
+            while True:
+                await asyncio.sleep(1)
+                if voice_channel.is_playing() == False and len(Queue) > 1:
+                    CurSong.append(Rqueue.pop(0))
+                    Queue.pop(0)
+                    if((Queue[0]).find('youtube') != -1):
+                        nsong = await Factory.get_urlYoutube(Queue[0],  loop = bot.loop)
+                        voice_channel.play(nsong, after=lambda e: CurSong.clear())
+                        
+                    else:
+                        nsong = await Factory.get_urlSpotify(Queue[0],  loop = bot.loop)
+                        voice_channel.play(discord.FFmpegPCMAudio(nsong,  after=lambda e: CurSong.clear()))
                         voice_channel.source = discord.PCMVolumeTransformer(voice_channel.source)
                         voice_channel.source.volume = 0.5
+                        
+                if voice_channel.is_playing() == False and len(Queue) <= 1:
+                    if(url.find("youtube") != -1):
+                        CurSong.append(Rqueue.pop(0))
+                        voice_channel.play(player, after=lambda e: CurSong.clear())
+                    else:
+                        CurSong.append(Rqueue.pop(0))
+                        voice_channel.play(discord.FFmpegPCMAudio(player), after=lambda e: CurSong.clear())
+                        voice_channel.source = discord.PCMVolumeTransformer(voice_channel.source)
+                        voice_channel.source.volume = 0.5
+        
         elif(url.find('youtube') != -1):
             async with ctx.typing():
                 player = await Factory.get_urlYoutube(url, loop = bot.loop)
                 Rqueue.append(player.title)
                         
-                await ctx.send("**Added:** " + player.title + "** to the Queue**")
-                while True:
-                    await asyncio.sleep(1)
-                    if voice_channel.is_playing() == False:
-                        voice_channel.play(player, after=lambda e: Rqueue.pop(0))					
+            await ctx.send("**Added:** " + player.title + "** to the Queue**")
+            while True:
+                await asyncio.sleep(1)
+                if voice_channel.is_playing() == False and len(Queue) > 1:
+                    CurSong.append(Rqueue.pop(0))
+                    Queue.pop(0)
+                    if((Queue[0]).find('youtube') != -1):
+                        nsong = await Factory.get_urlYoutube(Queue[0],  loop = bot.loop)
+                        voice_channel.play(nsong, after=lambda e: CurSong.clear())
+                        
+                    else:
+                        nsong = await Factory.get_urlSpotify(Queue[0],  loop = bot.loop)
+                        voice_channel.play(discord.FFmpegPCMAudio(nsong), after=lambda e: CurSong.clear())
+                        voice_channel.source = discord.PCMVolumeTransformer(voice_channel.source)
+                        voice_channel.source.volume = 0.5
+                        
+                if voice_channel.is_playing() == False and len(Queue) <= 1:
+                    if(url.find("youtube") != -1):
+                        CurSong.append(Rqueue.pop(0))
+                        voice_channel.play(player, after=lambda e: CurSong.clear())
+                    else:
+                        CurSong.append(Rqueue.pop(0))
+                        voice_channel.play(discord.FFmpegPCMAudio(player),  after=lambda e: CurSong.clear())
+                        voice_channel.source = discord.PCMVolumeTransformer(voice_channel.source)
+                        voice_channel.source.volume = 0.5
+                        
         else:
             async with ctx.typing():
                 player = await Factory.get_urlString(url, loop = bot.loop)
-                player.strip(".mp3")
                 Rqueue.append(player)
-
-                await ctx.send("**Added:** " + player + "** to the Queue**")
-                while True:
-                    await asyncio.sleep(1)
-                    if voice_channel.is_playing() == False:
-                        voice_channel.play(discord.FFmpegPCMAudio("currentsong.mp3"), after=lambda e: print(f"{player.title} has finished playing"))
+                
+            await ctx.send("**Added:** " + player + "** to the Queue**")
+            while True:
+                await asyncio.sleep(1)
+                if voice_channel.is_playing() == False and len(Queue) > 1:
+                    CurSong.append(Rqueue.pop(0))
+                    Queue.pop(0)
+                    if((Queue[0]).find('youtube') != -1):
+                        nsong = await Factory.get_urlYoutube(Queue[0],  loop = bot.loop)
+                        voice_channel.play(nsong, after=lambda e: CurSong.clear())
+                        
+                    else:
+                        nsong = await Factory.get_urlSpotify(Queue[0],  loop = bot.loop)
+                        voice_channel.play(discord.FFmpegPCMAudio(nsong, after=lambda e: CurSong.clear()))
+                        CurSong.clear()
                         voice_channel.source = discord.PCMVolumeTransformer(voice_channel.source)
-                        voice_channel.source.volume = 0.5	
-    	
+                        voice_channel.source.volume = 0.5
+                        
+                if voice_channel.is_playing() == False and len(Queue) <= 1:
+                    if(url.find("youtube") != -1):
+                        CurSong.append(Rqueue.pop(0))
+                        voice_channel.play(player, after=lambda e: CurSong.clear())
+                    else:
+                        CurSong.append(Rqueue.pop(0))
+                        voice_channel.play(discord.FFmpegPCMAudio(player,  after=lambda e: CurSong.clear()))
+                        voice_channel.source = discord.PCMVolumeTransformer(voice_channel.source)
+                        voice_channel.source.volume = 0.5
             
             
 class Playlist:
-	@bot.command(name='enqueue', help='Adds a song to the queue')
-	async def enqueue(ctx,url:str):	 
-
-		server = ctx.message.guild
-		voice_channel = server.voice_client
-
-
-		async with ctx.typing():
-			Queue.append(url)
-			player = await Factory.get_url(url,  loop = bot.loop)
-			Rqueue.append(player.title)
-		await ctx.send("**Added:** " + player.title + "** to the Queue**")
-		#jump
-		while True:
-			await asyncio.sleep(1) 
-
-			if voice_channel.is_playing() == False and len(Queue) > 1:
-				CurSong.append(Rqueue.pop(0))
-				Queue.pop(0)
-
-				yeet = await Factory.from_url(Queue[0],  loop = bot.loop)
-
-				voice_channel.play(yeet, after=lambda e: CurSong.clear())
-			if voice_channel.is_playing() == False and len(Queue) <= 1:
-				CurSong.append(Rqueue.pop(0))
-				voice_channel.play(player, after=lambda e: CurSong.clear())
+    @bot.command(name='enqueue', help='Adds a song to the queue')
+    async def enqueue(ctx,url:str):
+        server = ctx.message.guild
+        voice_channel = server.voice_client
+            
+            
+        Queue.append(url)
+        async with ctx.typing():
+            if (url.find('spotify') != -1):
+                player = await Factory.get_urlSpotify(url,  loop = bot.loop)
+                Rqueue.append(player)
+            elif(url.find('youtube') != -1):
+                player = await Factory.get_urlYoutube(url, loop = bot.loop)
+                Rqueue.append(player.title)
+            else:
+                player = await Factory.get_urlSpotify(url,  loop = bot.loop)
+                Rqueue.append(player)
+            if(url.find('youtube') != -1):
+                await ctx.send("**Added:** " + player.title + "** to the Queue**")
+            else:
+                await ctx.send("**Added:** " + player + "** to the Queue**")
+        #jump
+        while True:
+            await asyncio.sleep(1)
+            if voice_channel.is_playing() == False and len(Queue) > 1:
+                CurSong.append(Rqueue.pop(0))
+                Queue.pop(0)
+                
+                if((Queue[0]).find('youtube') != -1):
+                    nsong = await Factory.get_urlYoutube(Queue[0],  loop = bot.loop)
+                    voice_channel.play(nsong, after=lambda e: CurSong.clear())
+                else:
+                    nsong = await Factory.get_urlSpotify(Queue[0],  loop = bot.loop)
+                    voice_channel.play(discord.FFmpegPCMAudio(nsong),  after=lambda e: CurSong.clear())
+                    voice_channel.source = discord.PCMVolumeTransformer(voice_channel.source)
+                    voice_channel.source.volume = 0.5
+                
+            if voice_channel.is_playing() == False and len(Queue) <= 1:
+                if(url.find("youtube") != -1):
+                    CurSong.append(Rqueue.pop(0))
+                    voice_channel.play(player, after=lambda e: CurSong.clear())
+                else:
+                    CurSong.append(Rqueue.pop(0))
+                    voice_channel.play(discord.FFmpegPCMAudio(player),  after=lambda e: CurSong.clear())
+                    voice_channel.source = discord.PCMVolumeTransformer(voice_channel.source)
+                    voice_channel.source.volume = 0.5
 			
+ 
 
-	
 			
 	
 
