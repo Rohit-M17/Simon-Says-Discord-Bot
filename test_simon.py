@@ -30,7 +30,15 @@ async def test_bot():
     await dpytest.message("!queue")
     dpytest.verify_message("[Queue:\n1.Migos - Deadz feat. 2 Chainz [Official Video]\n2.Future & Lil Uzi Vert - That's It [Official Music Video]")
 
+    
+    await dpytest.message("!skip")
+    dpytest.verify_message("[]")
 
+    await dpytest.message("!queue")
+    dpytest.verify_message("[Queue:\n1.Future & Lil Uzi Vert - That's It [Official Music Video]]")
+
+    await dpytest.message("!join")
+    dpytest.verify_message("[]"
 
 mood = ['Testing','Looking for output','Pain','Listening to Simon']
 
