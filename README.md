@@ -89,6 +89,7 @@ Treat some data members of Simon Says Bot as abstract base class objects with pu
 ![queue](/Picture/workingqueue.PNG)
 ![functions](/Picture/workingfunctions.PNG)
 ![help](/Picture/helpfunction.PNG)
+![Omt](/Picture/Omt.PNG)
 
 ## Installation/Usage
 
