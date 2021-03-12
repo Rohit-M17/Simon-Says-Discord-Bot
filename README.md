@@ -84,7 +84,7 @@ Treat some data members of Simon Says Bot as abstract base class objects with pu
 > * Complete the sections below (i.e. Screenshots, Installation/Usage, Testing)
 > * Plan one more sprint (that you will not necessarily complete before the end of the quarter). Your In-progress and In-testing columns should be empty (you are not doing ore work currently) but your TODO column should have a full sprint plan in it as you have done before. This should include any known bugs (there should be some) or new eatures you would like to add. These should appear as issues/cards on your Kanban board. 
 
-# Source that helped: [https://www.youtube.com/watch?v=UvEldmLnuhU]
+### Source that helped: [https://www.youtube.com/watch?v=UvEldmLnuhU]
 
 ## Screenshots
 ![valgrind](/Picture/valgrind.png)
